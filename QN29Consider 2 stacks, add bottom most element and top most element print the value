@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_SIZE 100
+
+typedef struct {
+    int data[MAX_SIZE];
+    int top;
+} Stack;
+
+void initialize(Stack *s) {
+    s->top = -1;
+}
+
+int isEmpty(Stack *s) {
+    return s->top == -1;
+}
+
+void push(Stack *s, int value) {
+    if (s->top == MAX_SIZE - 1) {
+        printf("Stack is full\n");
+        return;
+    }
+    s->data[++(s->top)] = value;
+}
+
+int pop(Stack *s) {
+    if (isEmpty(s)) {
+        printf("Stack is empty\n");
+        return -1;
+    }
+    return s->data[(s->top)--];
+}
+
+int main() {
+    Stack stack1, stack2;
+    initialize(&stack1);
+    initialize(&stack2);
+
+    // Push some values onto the stacks
+    push(&stack1, 10);
+    push(&stack1, 20);
+    push(&stack2, 30);
+    push(&stack2, 40);
+
+    // Pop and print the bottom and top values from each stack
+    printf("Stack 1: Bottom=%d, Top=%d\n", pop(&stack1), stack1.data[stack1.top]);
+    printf("Stack 2: Bottom=%d, Top=%d\n", pop(&stack2), stack2.data[stack2.top]);
+
+    return 0;
+}
